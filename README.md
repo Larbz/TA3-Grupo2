@@ -4,6 +4,10 @@
 
 . Roberto Carlos Basauri Quispe - u20181C074
 
+## Link del video
+
+https://www.youtube.com/watch?v=xyh24kiy4Bc
+
 ## Introduccion
 
 El trabajo pide desarrollar el juego Hoop Hop Showdown – Rock Paper Scissors Hula Hoop, en el lenguaje Go y de forma concurrente, para la siguiente tarea se presenta el programa funcionando a través de la consola.
@@ -17,3 +21,4 @@ Se crean dos estructuras, una para el equipo y otra para los jugadores. El juego
 . También, se puede cambiar la lógica de armado del juego, ya que según la distribución del juego, son M aros equitativos hasta un centro por cada equipo. Si son N equipos, se podría interpretar como una matriz NxM, en el que los encuentros se den en el borde derecho de la matriz o en la misma fila.
 
 . Asimismo, se debe considerar cambiar la contención de los goroutines. Tomando en cuenta que el único momento donde se debe parar y ver el juego son el Piedra papel y tijeras, entonces es ahí donde se debería agregar un semáforo o mutex para evitar fallos, asimismo, todo movimiento adicional como saltos en aros, debería darse concurrentemente ya que no es necesario pararlos.
+
