@@ -6,7 +6,7 @@
 
 ## Link del video
 
-https://www.youtube.com/watch?v=xyh24kiy4Bc
+https://www.youtube.com/watch?v=rURYc4T7ZrM
 
 ## Introduccion
 
