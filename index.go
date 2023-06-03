@@ -15,7 +15,7 @@ type Team struct {
 
 type Player struct {
 	Team   *Team
-	Name string
+	Name   string
 	InGame bool
 }
 
@@ -28,7 +28,7 @@ func main() {
 
 	players := make([]*Player, 0)
 	for ind, team := range teams {
-		players = append(players, &Player{Team: team, Name: "Player "+ strconv.Itoa(ind+1), InGame: true})
+		players = append(players, &Player{Team: team, Name: "Player " + strconv.Itoa(ind+1), InGame: true})
 	}
 
 	rand.Seed(time.Now().UnixNano())
@@ -45,16 +45,18 @@ func main() {
 		go func(playerIndex int) {
 			defer wg.Done()
 			player := players[playerIndex]
-			
+
 			for player.InGame {
-				if isGameFinished(players) {break}
+				if isGameFinished(players) {
+					break
+				}
 				if currentPlayerIndex != playerIndex {
 					continue
 				}
 				// if !players[currentPlayerIndex].InGame{break}
 				move := <-moveCh
-				if move == "Cone" {
-					fmt.Printf("%s from %s reached another team's cone!\n", player.Name, player.Team.Name)
+				if move == "Bucket" {
+					fmt.Printf("%s from %s reached another team's Bucket!\n", player.Name, player.Team.Name)
 					otherTeamIndex := getRandomTeamIndex(player.Team, teams)
 					otherTeam := teams[otherTeamIndex]
 					otherPlayer := players[otherTeamIndex]
@@ -93,17 +95,17 @@ func main() {
 					}
 				} else {
 					fmt.Printf("%s from %s made a jump!\n", player.Name, player.Team.Name)
-					currentPlayerIndex = getNextPlayerIndex(currentPlayerIndex,len(players),players)
+					currentPlayerIndex = getNextPlayerIndex(currentPlayerIndex, len(players), players)
 				}
 			}
-		
+
 		}(i)
 	}
-	
+
 	for !isGameFinished(players) {
 		currentPlayer := players[currentPlayerIndex]
 		if currentPlayer.InGame {
-			fmt.Printf("%s from %s, it's your turn!\n", currentPlayer.Name, currentPlayer.Team.Name)
+			fmt.Printf("%s from %s turn!\n", currentPlayer.Name, currentPlayer.Team.Name)
 			fmt.Println("Jump into each hoop to move across the board.")
 
 			moveCh <- makeJump(playingBoard, currentPlayerIndex)
@@ -116,7 +118,7 @@ func main() {
 
 	fmt.Println("Game over!")
 	for _, team := range teams {
-		if team.Tokens !=0{
+		if team.Tokens != 0 {
 			fmt.Printf("%s is the winner, they collected %d tokens.\n", team.Name, team.Tokens)
 		}
 	}
@@ -135,12 +137,12 @@ func createPlayingBoard(numTeams int) []string {
 	for i := 0; i < numTeams; i++ {
 		playingBoard[i] = "Hoop"
 	}
-	playingBoard[numTeams] = "Cone"
+	playingBoard[numTeams] = "Bucket"
 	return playingBoard
 }
 
 func makeJump(playingBoard []string, currentPlayerIndex int) string {
-	jumpOptions := []string{"Hoop", "Hoop", "Hoop", "Cone", "Player"}
+	jumpOptions := []string{"Hoop", "Hoop", "Hoop", "Bucket", "Player"}
 	move := jumpOptions[rand.Intn(len(jumpOptions))]
 
 	if move == "Player" && playingBoard[currentPlayerIndex] != "Hoop" {
@@ -166,9 +168,9 @@ func getRandomTeamIndex(currentTeam *Team, teams []*Team) int {
 	return otherTeamIndex
 }
 
-func deletePlayer(teams []*Team,index int){
+func deletePlayer(teams []*Team, index int) {
 	result := append(teams[:index], teams[index+1:]...)
-	teams=result
+	teams = result
 }
 
 func getTeamIndex(team *Team, teams []*Team) int {
