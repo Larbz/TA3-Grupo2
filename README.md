@@ -1,8 +1,8 @@
 # TA3-Grupo2
 ## Integrantes
-. Luis Roberto Arroyo Bonifaz
+. Luis Roberto Arroyo Bonifaz - u201716094
 
-. Roberto Carlos Basauri Quispe
+. Roberto Carlos Basauri Quispe - u20181C074
 
 ## Introduccion
 
